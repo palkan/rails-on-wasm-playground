@@ -1,12 +1,15 @@
 require_relative "boot"
 
 require "wasmify/rails/shim"
+$LOAD_PATH.unshift File.expand_path(File.join(__dir__, "../gems/wasmify-rails"))
 
 require "rails/all"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
+
+ActiveRecord::ConnectionAdapters.register("pglite", "ActiveRecord::ConnectionAdapters::PGliteAdapter", "active_record/connection_adapters/pglite_adapter")
 
 module OfflineTodos
   class Application < Rails::Application

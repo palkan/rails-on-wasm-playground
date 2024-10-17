@@ -1,20 +1,19 @@
 import {
   initRailsVM,
   Progress,
-  registerSQLiteWasmInterface,
   RackHandler,
 } from "wasmify-rails";
 
-import { setupSQLiteDatabase } from "./database.js";
+import { setupPGliteDatabase, registerPGliteInterface } from "./pglite.js";
 
 let db = null;
 
 const initDB = async (progress) => {
   if (db) return db;
 
-  progress?.updateStep("Initializing SQLite database...");
-  db = await setupSQLiteDatabase();
-  progress?.updateStep("SQLite database created.");
+  progress?.updateStep("Initializing PGlite database...");
+  db = await setupPGliteDatabase();
+  progress?.updateStep("PGlite database created.");
 
   return db;
 };
@@ -39,14 +38,14 @@ const initVM = async (progress, opts = {}) => {
     await initDB(progress);
   }
 
-  registerSQLiteWasmInterface(self, db);
+  registerPGliteInterface(self, db);
 
   self.actionCableBroadcaster = new ActionCableBroadcaster();
 
   let redirectConsole = true;
 
   vm = await initRailsVM("/app.wasm", {
-    database: { adapter: "sqlite3_wasm" },
+    database: { adapter: "pglite" },
     progressCallback: (step) => {
       progress?.updateStep(step);
     },
@@ -59,7 +58,7 @@ const initVM = async (progress, opts = {}) => {
 
   // Ensure schema is loaded
   progress?.updateStep("Preparing database...");
-  vm.eval("ActiveRecord::Tasks::DatabaseTasks.prepare_all");
+  await vm.evalAsync("ActiveRecord::Tasks::DatabaseTasks.prepare_all");
 
   redirectConsole = false;
 
@@ -87,7 +86,7 @@ self.addEventListener("install", (event) => {
   event.waitUntil(installApp().then(() => self.skipWaiting()));
 });
 
-const rackHandler = new RackHandler(initVM, { assumeSSL: true });
+const rackHandler = new RackHandler(initVM, { assumeSSL: true, async: true });
 
 self.addEventListener("fetch", (event) => {
   const bootResources = ["/boot", "/boot.js", "/boot.html", "/rails.sw.js"];

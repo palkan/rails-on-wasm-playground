@@ -9,7 +9,7 @@ export default defineConfig({
     },
   },
   optimizeDeps: {
-    exclude: ["@sqlite.org/sqlite-wasm"],
+    exclude: ["@sqlite.org/sqlite-wasm", "@electric-sql/pglite"],
   },
   plugins: [
     VitePWA({
