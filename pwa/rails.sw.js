@@ -45,8 +45,13 @@ const initVM = async (progress, opts = {}) => {
 
   let redirectConsole = true;
 
+  const env = [];
+
+  // env.push(`RUBY_FIBER_MACHINE_STACK_SIZE=${String(1024 * 1024 * 20)}`)
+
   vm = await initRailsVM("/app.wasm", {
     database: { adapter: "sqlite3_wasm" },
+    env,
     progressCallback: (step) => {
       progress?.updateStep(step);
     },
@@ -87,7 +92,7 @@ self.addEventListener("install", (event) => {
   event.waitUntil(installApp().then(() => self.skipWaiting()));
 });
 
-const rackHandler = new RackHandler(initVM, { assumeSSL: true });
+const rackHandler = new RackHandler(initVM, { assumeSSL: true, async: false });
 
 self.addEventListener("fetch", (event) => {
   const bootResources = ["/boot", "/boot.js", "/boot.html", "/rails.sw.js"];

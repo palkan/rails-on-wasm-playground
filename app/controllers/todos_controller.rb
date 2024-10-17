@@ -4,6 +4,10 @@ class TodosController < ApplicationController
   # GET /todos or /todos.json
   def index
     @todos = Todo.all
+    respond_to do |format|
+      format.html
+      format.json { render json: @todos }
+    end
   end
 
   # GET /todos/1 or /todos/1.json

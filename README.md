@@ -1,24 +1,39 @@
-# README
+# Rails on Wasm playground application
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a sample application to showcase different Rails on Wasm techniques.
 
-Things you may want to cover:
+## Install & Run
 
-* Ruby version
+You need to make a few steps to run this application in your browser:
 
-* System dependencies
+1. Install Ruby deps:
 
-* Configuration
+```bash
+bundle install
+```
 
-* Database creation
+1+. Feel free to run the app locally (as a regular Rails app):
 
-* Database initialization
+```bash
+bin/dev
+```
 
-* How to run the test suite
+2. Compile the app into a Wasm module:
 
-* Services (job queues, cache servers, search engines, etc.)
+```bash
+bin/rails wasmify:pack
+```
 
-* Deployment instructions
+3. Install PWA app dependencies:
 
-* ...
+```bash
+cd pwa/ && yarn install
+```
+
+4. Run the PWA app to see the Rails app running in your browser:
+
+```bash
+cd pwa/ && yarn dev
+```
+
+Go to [http://localhost:5173/boot.html](http://localhost:5173/boot.html).

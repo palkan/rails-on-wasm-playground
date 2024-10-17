@@ -1,10 +1,10 @@
 PATH
   remote: ../../anycable/anycable-rails
   specs:
-    anycable-rails (1.5.3)
+    anycable-rails (1.5.4)
       anycable (~> 1.5.0)
-      anycable-rails-core (= 1.5.3)
-    anycable-rails-core (1.5.3)
+      anycable-rails-core (= 1.5.4)
+    anycable-rails-core (1.5.4)
       actioncable (>= 7.0, < 9.0)
       anycable-core (~> 1.5.0)
       globalid
@@ -12,7 +12,7 @@ PATH
 PATH
   remote: ../../writebook/gems/wasmify-rails
   specs:
-    wasmify-rails (0.1.4)
+    wasmify-rails (0.1.5)
       js (>= 2.6, < 3.0)
       railties (>= 7.0, < 9.0)
       ruby_wasm (>= 2.6, < 3.0)
