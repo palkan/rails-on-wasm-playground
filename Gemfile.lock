@@ -161,6 +161,15 @@ GEM
     grpc (1.67.0-x86_64-linux)
       google-protobuf (>= 3.25, < 5.0)
       googleapis-common-protos-types (~> 1.0)
+    haml (6.3.0)
+      temple (>= 0.8.2)
+      thor
+      tilt
+    haml-rails (2.1.0)
+      actionpack (>= 5.1)
+      activesupport (>= 5.1)
+      haml (>= 4.0.6)
+      railties (>= 5.1)
     i18n (1.14.6)
       concurrent-ruby (~> 1.0)
     importmap-rails (2.0.1)
@@ -345,7 +354,9 @@ GEM
       railties (>= 7.0.0)
     tailwindcss-rails (2.7.6-x86_64-linux)
       railties (>= 7.0.0)
+    temple (0.10.3)
     thor (1.3.2)
+    tilt (2.4.0)
     timeout (0.4.1)
     turbo-rails (2.0.10)
       actionpack (>= 6.0.0)
@@ -393,6 +404,7 @@ DEPENDENCIES
   brakeman
   capybara
   debug
+  haml-rails
   importmap-rails
   jbuilder
   puma (>= 5.0)

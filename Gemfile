@@ -3,6 +3,8 @@ source "https://rubygems.org"
 gem "actioncable-next", group: [:default, :wasm]
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.2", group: [:default, :wasm]
+# Give HAML a try
+gem "haml-rails", group: [:default, :wasm]
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails", group: [:default, :wasm]
 # Use sqlite3 as the database for Active Record

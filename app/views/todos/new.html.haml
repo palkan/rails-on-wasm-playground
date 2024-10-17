@@ -1,0 +1,6 @@
+.w-full.flex.flex-col.align-middle
+  .flex.justify-start.items-center
+    = link_to "Back to all ToDo-s", todos_path, class: "font-medium text-lg text-gray-500 hover:underline"
+  .mx-auto.mt-10
+    %h1.font-bold.text-4xl New ToDo
+    = render "form", todo: @todo

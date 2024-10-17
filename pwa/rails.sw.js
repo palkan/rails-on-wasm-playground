@@ -52,6 +52,7 @@ const initVM = async (progress, opts = {}) => {
   vm = await initRailsVM("/app.wasm", {
     database: { adapter: "sqlite3_wasm" },
     env,
+    debug: true,
     progressCallback: (step) => {
       progress?.updateStep(step);
     },
@@ -65,6 +66,12 @@ const initVM = async (progress, opts = {}) => {
   // Ensure schema is loaded
   progress?.updateStep("Preparing database...");
   vm.eval("ActiveRecord::Tasks::DatabaseTasks.prepare_all");
+
+  progress?.updateStep("Warm up /todos...");
+  vm.eval(`
+    request = Rack::MockRequest.env_for("http://localhost:3000/", {"HTTP_HOST" => "localhost"})
+    puts Rails.application.call(request)
+  `);
 
   redirectConsole = false;
 
@@ -92,7 +99,7 @@ self.addEventListener("install", (event) => {
   event.waitUntil(installApp().then(() => self.skipWaiting()));
 });
 
-const rackHandler = new RackHandler(initVM, { assumeSSL: true, async: false });
+const rackHandler = new RackHandler(initVM, { assumeSSL: true, async: true });
 
 self.addEventListener("fetch", (event) => {
   const bootResources = ["/boot", "/boot.js", "/boot.html", "/rails.sw.js"];
