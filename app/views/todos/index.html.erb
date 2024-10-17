@@ -1,0 +1,17 @@
+<div class="w-full">
+  <%= turbo_stream_from "todos" %>
+  <% if notice.present? %>
+    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
+  <% end %>
+
+  <% content_for :title, "Todos" %>
+
+  <div class="flex justify-between items-center">
+    <h1 class="font-bold text-4xl">ToDo 📝</h1>
+    <%= link_to "+", new_todo_path, class: "rounded-lg py-3 px-5 border-black hover:bg-gray-100 border text-black block font-medium text-lg" %>
+  </div>
+
+  <ul id="todos" class="min-w-full mt-10">
+    <%= render @todos %>
+  </ul>
+</div>

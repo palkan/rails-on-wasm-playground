@@ -1,0 +1,34 @@
+<%= form_with(model: todo, class: "contents") do |form| %>
+  <% if todo.errors.any? %>
+    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
+      <h2><%= pluralize(todo.errors.count, "error") %> prohibited this todo from being saved:</h2>
+
+      <ul>
+        <% todo.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="my-5">
+    <%= form.text_field :description, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
+
+  <% unless todo.new_record? %>
+    <div class="my-5">
+      <%= form.label :completed %>
+      <%= form.check_box :completed, class: "w-6 h-6 text-green-600 rounded focus:ring-blue-500 focus:ring-2" %>
+    </div>
+  <% end %>
+
+  <div class="inline">
+    <%= form.submit "Save", class: "rounded-lg py-3 px-5 bg-green-600 text-white inline-block font-medium cursor-pointer" %>
+  </div>
+<% end %>
+
+<% unless todo.new_record? %>
+  <div class="inline-block ml-2">
+    <%= button_to "Delete", todo, method: :delete, class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium" %>
+  </div>
+<% end %>

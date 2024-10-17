@@ -1,0 +1,13 @@
+<div class="w-full flex flex-col align-middle">
+  <div class="flex justify-start items-center">
+    <%= link_to "Back to all ToDo-s", todos_path, class: "font-medium text-lg text-gray-500 hover:underline" %>
+  </div>
+  <%= turbo_stream_from @todo %>
+  <div class="mx-auto mt-10">
+    <% if notice.present? %>
+      <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
+    <% end %>
+
+    <%= render "form", todo: @todo %>
+  </div>
+</div>

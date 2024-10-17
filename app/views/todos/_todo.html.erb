@@ -1,0 +1,5 @@
+<li id="<%= dom_id todo %>">
+  <div class="flex items-center">
+    <%= link_to todo.description, todo, class: "font-medium text-lg text-blue-600 dark:text-blue-500 hover:underline #{"line-through" if todo.completed?}" %>
+  </div>
+</li>
