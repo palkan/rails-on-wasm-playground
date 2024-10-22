@@ -21,7 +21,7 @@ gem "tailwindcss-rails", group: [:default, :wasm]
 gem "jbuilder", group: [:default, :wasm]
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
-gem "anycable-rails", path: "../../anycable/anycable-rails"
+gem "anycable-rails", "~> 1.5.4"
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
 
@@ -56,7 +56,7 @@ group :test do
   gem "selenium-webdriver"
 end
 
-gem "wasmify-rails", "~> 0.1.3", group: [:default, :wasm], path: "../../writebook/gems/wasmify-rails"
+gem "wasmify-rails", "~> 0.1.3", group: [:default, :wasm]
 
 group :wasm do
   gem "tzinfo-data"
