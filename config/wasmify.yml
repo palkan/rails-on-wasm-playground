@@ -1,4 +1,5 @@
-output_dir: pwa/
+output_dir: pwa/public
+
 # Specify the list of directories to be included into the final
 # app.wasm file.
 pack_directories:

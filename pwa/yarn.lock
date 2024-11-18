@@ -2622,13 +2622,13 @@ vite@^4.4.5:
   optionalDependencies:
     fsevents "~2.3.2"
 
-wasmify-rails@^0.1.5:
-  version "0.1.5"
-  resolved "https://registry.yarnpkg.com/wasmify-rails/-/wasmify-rails-0.1.5.tgz#867909ec6d20df372784e2e06ada59ff172c8851"
-  integrity sha512-CgbdcUvYV56w1851HlkL0hrnxkWHhXp7/jjQ2Jr9Q4OOZRz76LtbPj11TN58xLGMHISnvSnUfQWoIRLBcVm33A==
+"wasmify-rails@~> 0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/wasmify-rails/-/wasmify-rails-0.2.0.tgz#31e6eab5d8d494a070acb35d850e8f1b73119e46"
+  integrity sha512-5UIFbc4QJarR+1s8gndJGwGPcdE5Vu7LgBnjVttphoEreZcPANHcmT7RLr6qyvw1lDQQDOy1vvyHtT496hOTZQ==
   dependencies:
     "@bjorn3/browser_wasi_shim" "^0.3.0"
-    "@ruby/wasm-wasi" "^2.6.2"
+    "@ruby/wasm-wasi" ">= 2.6.0"
     set-cookie-parser "^2.7.0"
 
 webidl-conversions@^4.0.2:
