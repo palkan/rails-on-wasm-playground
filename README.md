@@ -1,6 +1,12 @@
 # Rails on Wasm playground application
 
-This is a sample application to showcase different Rails on Wasm techniques.
+This is a sample application to showcase different Rails on Wasm techniques. The baseline version comes with
+a simple Rails app backed by a SQLite3 database.
+
+> [!Tip]
+> Read more about Rails on Wasm in our [Writebook](https://writebook-on-wasm.fly.dev/) 📖.
+
+See more features and variations in the [PRs marked as "demo"](https://github.com/palkan/rails-on-wasm-playground/pulls?q=is%3Aopen+is%3Apr+label%3ADemo).
 
 ## Install & Run
 

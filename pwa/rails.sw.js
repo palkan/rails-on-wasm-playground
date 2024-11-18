@@ -21,17 +21,6 @@ const initDB = async (progress) => {
 
 let vm = null;
 
-class ActionCableBroadcaster {
-  constructor() {
-    this.bc = new BroadcastChannel("action_cable");
-  }
-
-  broadcast(stream, data) {
-    console.log("[rails-web] Broadcasting to channel:", stream, data);
-    this.bc.postMessage({ stream, data });
-  }
-}
-
 const initVM = async (progress, opts = {}) => {
   if (vm) return vm;
 
@@ -41,13 +30,9 @@ const initVM = async (progress, opts = {}) => {
 
   registerSQLiteWasmInterface(self, db);
 
-  self.actionCableBroadcaster = new ActionCableBroadcaster();
-
   let redirectConsole = true;
 
   const env = [];
-
-  // env.push(`RUBY_FIBER_MACHINE_STACK_SIZE=${String(1024 * 1024 * 20)}`)
 
   vm = await initRailsVM("/app.wasm", {
     database: { adapter: "sqlite3_wasm" },

@@ -12,10 +12,4 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "todos#index"
-
-  namespace :action_cable do
-    post "/open" => "commands#open"
-    post "/message" => "commands#message"
-    post "/close" => "commands#close"
-  end
 end

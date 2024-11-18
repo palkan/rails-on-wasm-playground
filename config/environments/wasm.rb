@@ -2,19 +2,6 @@
 
 require_relative "production"
 
-class BroadcastChannelSubscriptionAdapter < ActionCable::SubscriptionAdapter::Base
-  def broadcast(channel, payload)
-    Rails.logger.info "Broadcasting to #{channel}"
-    begin
-      JS.global["actionCableBroadcaster"].broadcast(channel, payload)
-    rescue => e
-      Rails.logger.error "Failed to broadcast to #{channel}: #{e.message}"
-    end
-  end
-end
-
-ActionCable.server.config.pubsub_adapter = "BroadcastChannelSubscriptionAdapter"
-
 Rails.application.configure do
   config.enable_reloading = false
 
@@ -34,7 +21,7 @@ Rails.application.configure do
   config.cache_store = :memory_store
   config.active_job.queue_adapter = :inline
   config.action_mailer.delivery_method = :null
-  config.action_cable.url = "local:///action_cable"
+  config.action_cable.url = "null://"
 
   if config.respond_to?(:active_storage)
     config.active_storage.variant_processor = :null
