@@ -5,21 +5,25 @@
 #   gem "sqlite3"
 #
 default: &default
-  adapter: sqlite3
+  adapter: postgresql
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
 
+# Go to the .electric folder and run `docker compose up` to start the database
 development:
   <<: *default
-  database: storage/development.sqlite3
+  host: localhost
+  port: 54321
+  username: postgres
+  password: password
+  database: electric_rails
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: storage/test.sqlite3
-
+  database: electric_rails_test
 
 # SQLite3 write its data on the local filesystem, as such it requires
 # persistent disks. If you are deploying to a managed service, you should
@@ -30,5 +34,6 @@ test:
 production:
   <<: *default
   # database: path/to/persistent/storage/production.sqlite3
+
 wasm:
   adapter: <%= ENV.fetch("ACTIVE_RECORD_ADAPTER") { "nulldb" } %>

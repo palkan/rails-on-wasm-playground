@@ -1,42 +1,42 @@
 import {
   initRailsVM,
   Progress,
-  registerSQLiteWasmInterface,
   RackHandler,
+  registerPGliteWasmInterface,
 } from "wasmify-rails";
 
-import { setupSQLiteDatabase } from "./database.js";
+import { setupPGliteDatabase, setupElectricSync } from "./pglite.js";
 
 let db = null;
 
 const initDB = async (progress) => {
   if (db) return db;
 
-  progress?.updateStep("Initializing SQLite database...");
-  db = await setupSQLiteDatabase();
-  progress?.updateStep("SQLite database created.");
+  progress?.updateStep("Initializing PGlite database...");
+  db = await setupPGliteDatabase();
+  progress?.updateStep("PGlite database created.");
 
   return db;
 };
 
 let vm = null;
 
-const initVM = async (progress, opts = {}) => {
+export const initVM = async (progress, opts = {}) => {
   if (vm) return vm;
 
   if (!db) {
     await initDB(progress);
   }
 
-  registerSQLiteWasmInterface(self, db);
+  registerPGliteWasmInterface(self, db);
 
   let redirectConsole = true;
 
   const env = [];
 
   vm = await initRailsVM("/app.wasm", {
-    database: { adapter: "sqlite3_wasm" },
-    env,
+    database: { adapter: "pglite" },
+    async: true,
     progressCallback: (step) => {
       progress?.updateStep(step);
     },
@@ -49,7 +49,10 @@ const initVM = async (progress, opts = {}) => {
 
   // Ensure schema is loaded
   progress?.updateStep("Preparing database...");
-  vm.eval("ActiveRecord::Tasks::DatabaseTasks.prepare_all");
+  await vm.evalAsync("ActiveRecord::Tasks::DatabaseTasks.prepare_all");
+
+  progress?.updateStep("Enable electric-sql...");
+  await setupElectricSync(db, "http://localhost:3131");
 
   redirectConsole = false;
 
@@ -77,7 +80,7 @@ self.addEventListener("install", (event) => {
   event.waitUntil(installApp().then(() => self.skipWaiting()));
 });
 
-const rackHandler = new RackHandler(initVM, { assumeSSL: true, async: false });
+const rackHandler = new RackHandler(initVM, { assumeSSL: true, async: true });
 
 self.addEventListener("fetch", (event) => {
   const bootResources = ["/boot", "/boot.js", "/boot.html", "/rails.sw.js"];
