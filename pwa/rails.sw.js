@@ -6,6 +6,7 @@ import {
 } from "wasmify-rails";
 
 import { setupSQLiteDatabase } from "./database.js";
+import { ActionCableBroadcaster  } from "./local_cable.js";
 
 let db = null;
 
@@ -29,6 +30,8 @@ const initVM = async (progress, opts = {}) => {
   }
 
   registerSQLiteWasmInterface(self, db);
+
+  self.actionCableBroadcaster = new ActionCableBroadcaster();
 
   let redirectConsole = true;
 

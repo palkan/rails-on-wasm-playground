@@ -10,4 +10,4 @@ production:
   channel_prefix: offline_todos_production
 
 wasm:
-  adapter: inline
+  adapter: broadcast_channel
