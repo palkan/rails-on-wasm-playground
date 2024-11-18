@@ -21,7 +21,7 @@ Rails.application.configure do
   config.cache_store = :memory_store
   config.active_job.queue_adapter = :inline
   config.action_mailer.delivery_method = :null
-  config.action_cable.url = "null://"
+  config.action_cable.url = "local:///action_cable"
 
   if config.respond_to?(:active_storage)
     config.active_storage.variant_processor = :null
