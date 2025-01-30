@@ -8,8 +8,11 @@ export default defineConfig({
       "Cross-Origin-Embedder-Policy": "require-corp",
     },
   },
+  // optimizeDeps: {
+  //   exclude: ["@electric-sql/pglite"],
+  // },
   optimizeDeps: {
-    exclude: ["@electric-sql/pglite"],
+    exclude: ["@sqlite.org/sqlite-wasm"],
   },
   plugins: [
     VitePWA({

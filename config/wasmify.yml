@@ -1,5 +1,7 @@
 output_dir: pwa/public
 
+ruby_version: "3.4"
+
 # Specify the list of directories to be included into the final
 # app.wasm file.
 pack_directories:

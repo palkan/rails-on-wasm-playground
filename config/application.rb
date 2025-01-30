@@ -2,11 +2,19 @@ require_relative "boot"
 
 require "wasmify/rails/shim"
 
+$LOADED_FEATURES << "bigdecimal.so" if on_wasm?
+
+require "arel"
+require "active_support/all"
 require "rails/all"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
+
+ActiveSupport::Notifications.subscribe "load_config_initializer.railties" do |name, start, finish, id, payload|
+  puts "Loading initializer: #{payload[:initializer]}"
+end
 
 module OfflineTodos
   class Application < Rails::Application

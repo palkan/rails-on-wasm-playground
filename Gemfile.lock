@@ -1,3 +1,11 @@
+PATH
+  remote: ../../writebook/gems/wasmify-rails
+  specs:
+    wasmify-rails (0.2.2)
+      js (>= 2.6, < 3.0)
+      railties (>= 7.0, < 9.0)
+      ruby_wasm (>= 2.6, < 3.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -96,7 +104,7 @@ GEM
       ruby-next-core (~> 1.0)
     ast (2.4.2)
     base64 (0.2.0)
-    bigdecimal (3.1.8)
+    bigdecimal (3.1.9)
     bindex (0.8.1)
     bootsnap (1.18.4)
       msgpack (~> 1.2)
@@ -162,7 +170,7 @@ GEM
     jbuilder (2.13.0)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
-    js (2.7.0)
+    js (2.7.1)
     json (2.7.2)
     language_server-protocol (3.17.0.3)
     logger (1.6.1)
@@ -287,13 +295,13 @@ GEM
       rubocop-rails
     ruby-next-core (1.0.3)
     ruby-progressbar (1.13.0)
-    ruby_wasm (2.7.0)
-    ruby_wasm (2.7.0-aarch64-linux)
-    ruby_wasm (2.7.0-aarch64-linux-musl)
-    ruby_wasm (2.7.0-arm64-darwin)
-    ruby_wasm (2.7.0-x86_64-darwin)
-    ruby_wasm (2.7.0-x86_64-linux)
-    ruby_wasm (2.7.0-x86_64-linux-musl)
+    ruby_wasm (2.7.1)
+    ruby_wasm (2.7.1-aarch64-linux)
+    ruby_wasm (2.7.1-aarch64-linux-musl)
+    ruby_wasm (2.7.1-arm64-darwin)
+    ruby_wasm (2.7.1-x86_64-darwin)
+    ruby_wasm (2.7.1-x86_64-linux)
+    ruby_wasm (2.7.1-x86_64-linux-musl)
     rubyzip (2.3.2)
     securerandom (0.3.1)
     selenium-webdriver (4.25.0)
@@ -335,10 +343,6 @@ GEM
       tzinfo (>= 1.0.0)
     unicode-display_width (2.6.0)
     useragent (0.16.10)
-    wasmify-rails (0.2.0)
-      js (>= 2.6, < 3.0)
-      railties (>= 7.0, < 9.0)
-      ruby_wasm (>= 2.6, < 3.0)
     web-console (4.2.1)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
@@ -351,7 +355,7 @@ GEM
     websocket-extensions (0.1.5)
     xpath (3.2.0)
       nokogiri (~> 1.8)
-    zeitwerk (2.6.18)
+    zeitwerk (2.7.1)
 
 PLATFORMS
   aarch64-linux
@@ -388,7 +392,7 @@ DEPENDENCIES
   tailwindcss-rails
   turbo-rails
   tzinfo-data
-  wasmify-rails (~> 0.2.0)
+  wasmify-rails (~> 0.2.0)!
   web-console
 
 BUNDLED WITH

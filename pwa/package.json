@@ -16,6 +16,7 @@
   "dependencies": {
     "@electric-sql/client": "^0.7.2",
     "@electric-sql/pglite": "^0.2.13",
-    "wasmify-rails": "~> 0.2.0"
+    "@sqlite.org/sqlite-wasm": "3.46.1-build3",
+    "wasmify-rails": "file:../../../writebook/gems/wasmify-rails"
   }
 }

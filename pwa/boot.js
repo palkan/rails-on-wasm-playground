@@ -91,6 +91,16 @@ async function init() {
   reloadDebugButton.addEventListener("click", async function () {
     registration.active.postMessage({ type: "reload-rails", debug: true });
   });
+
+  const cmdButton = document.getElementById("cmd-button");
+  const cmdInput = document.getElementById("cmd-input");
+  cmdButton.addEventListener("click", async function () {
+    registration.active.postMessage({ type: "rpc", command: cmdInput.value });
+  });
 }
 
-init();
+// init();
+
+import { initVM } from './rails.sw'
+
+window.initVM = initVM;
